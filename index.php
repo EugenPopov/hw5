@@ -8,7 +8,6 @@ use liw\src\MemoryCacheStorage;
 /*
 $ms = new MemoryCacheStorage();
 
-$ms->set('zaebis','snimay');
 
 
 $jek = $ms->get('zaebis');
