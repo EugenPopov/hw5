@@ -11,7 +11,7 @@ namespace liw\src;
 
 class JsonStorage implements KeyValueStorageInterface
 {
-
+    const FILE_NAME = 'data.json';
     /**
      * Store value by key.
      *
@@ -20,7 +20,12 @@ class JsonStorage implements KeyValueStorageInterface
      */
     public function set($key, $value)
     {
-        // TODO: Implement set() method.
+        $array = array(
+            $key => $value
+        );
+        $json=json_encode($array);
+        file_put_contents(self::FILE_NAME, $json, FILE_APPEND | LOCK_EX);
+
     }
 
     /**
@@ -30,7 +35,9 @@ class JsonStorage implements KeyValueStorageInterface
      */
     public function get($key)
     {
-        // TODO: Implement get() method.
+        $json = file_get_contents(self::FILE_NAME);
+        $array=json_decode($json,true);
+        return $array[$key];
     }
 
     /**
@@ -38,7 +45,9 @@ class JsonStorage implements KeyValueStorageInterface
      */
     public function has($key)
     {
-        // TODO: Implement has() method.
+        $json = file_get_contents(self::FILE_NAME);
+        $array=json_decode($json,true);
+        return isset($array[$key]);
     }
 
     /**
@@ -48,7 +57,12 @@ class JsonStorage implements KeyValueStorageInterface
      */
     public function remove($key)
     {
-        // TODO: Implement remove() method.
+        $json = file_get_contents(self::FILE_NAME);
+        $array=json_decode($json,true);
+        unset($array[$key]);
+        $json=json_encode($array);
+        file_put_contents(self::FILE_NAME,$json);
+
     }
 
     /**
@@ -58,6 +72,10 @@ class JsonStorage implements KeyValueStorageInterface
      */
     public function clear($key)
     {
-        // TODO: Implement clear() method.
+        $json = file_get_contents(self::FILE_NAME);
+        $array=json_decode($json,true);
+        $array[$key]='';
+        $json=json_encode($array);
+        file_put_contents(self::FILE_NAME,$json,FILE_APPEND);
     }
 }

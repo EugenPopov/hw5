@@ -30,6 +30,7 @@ class YamlStorage implements KeyValueStorageInterface
         unset($array[$key]);
         file_put_contents(self::FILE_NAME, $array,  LOCK_EX);
     }
+
     public function clear($key)
     {
         $array = Yaml::parseFile(self::FILE_NAME);
