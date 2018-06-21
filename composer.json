@@ -1,0 +1,20 @@
+{
+    "name": "eugene/hw",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Popov Eugene",
+            "email": "zhenya1995q@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "symfony/yaml": "^4.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "liw\\":""
+        }
+    }
+}
