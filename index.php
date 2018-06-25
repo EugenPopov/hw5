@@ -4,8 +4,8 @@ require_once __DIR__. '/vendor/autoload.php';
 
 
 $ms = new liw\src\MemoryValueStorage();
-$j1 = new \liw\src\JsonValueStorage('storage.json');
-$m1 = new \liw\src\YamlValueStorage('storage.yaml');
+$j1 = new \liw\src\JsonValueStorage('data/storage.json');
+$m1 = new \liw\src\YamlValueStorage('data/storage.yaml');
 
 $m1->set('qq','12344gsg');
 $m1->set('qq','12344gsg');
