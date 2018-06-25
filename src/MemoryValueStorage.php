@@ -14,7 +14,7 @@ class MemoryValueStorage implements KeyValueStorageInterface
     }
 
 
-    public function get($key)
+    public function get(string $key)
     {
         if(isset($this->storage[$key]))
             return $this->storage[$key];

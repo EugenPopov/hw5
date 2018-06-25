@@ -5,49 +5,59 @@ namespace liw\src;
 
 class JsonValueStorage implements KeyValueStorageInterface
 {
-    const FILE_NAME = 'data.json';
+    private $file_name;
+
+    public function __construct($file)
+    {
+        $this->file_name=$file;
+    }
+
+    private function getContent($file): ?array
+    {
+        if(!file_exists($file))
+            file_put_contents($file,'',LOCK_EX);
+        $string = file_get_contents($file);
+        return json_decode($string,true);
+    }
 
     public function set($key, $value) :void
     {
-        $json = file_get_contents(self::FILE_NAME);
-        $array=json_decode($json,true);
+
+        $array = $this->getContent($this->file_name);
         if(!isset($array[$key]))
         {
             $array[$key] = $value;
             $json = json_encode($array);
-            file_put_contents(self::FILE_NAME, $json, LOCK_EX);
+            file_put_contents($this->file_name, $json, LOCK_EX);
         }
     }
 
-    public function get($key)
+    public function get(string $key)
     {
-        $json = file_get_contents(self::FILE_NAME);
-        $array=json_decode($json,true);
+        $array = $this->getContent($this->file_name);
         if(isset($array[$key]))
             return $array[$key];
     }
 
     public function has($key) :bool
     {
-        $json = file_get_contents(self::FILE_NAME);
-        $array=json_decode($json,true);
+        $array = $this->getContent($this->file_name);
         return isset($array[$key]);
     }
 
     public function remove($key) :void
     {
-        $json = file_get_contents(self::FILE_NAME);
-        $array=json_decode($json,true);
+        $array = $this->getContent($this->file_name);
         if(isset($array[$key]))
         {
             unset($array[$key]);
             $json = json_encode($array);
-            file_put_contents(self::FILE_NAME, $json);
+            file_put_contents($this->file_name, $json);
         }
     }
 
     public function clear() :void
     {
-        file_put_contents(self::FILE_NAME,'',LOCK_EX);
+        file_put_contents($this->file_name,'',LOCK_EX);
     }
 }
