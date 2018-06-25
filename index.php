@@ -7,8 +7,10 @@ use liw\src\MemoryValueStorage;
 
 $ms = new MemoryValueStorage();
 
+
 $ms->set('rt','first');
 $ms->set('qq','second');
+
 
 echo $ms->get('qq'),PHP_EOL;
 echo $ms->has('qq'),PHP_EOL;
@@ -44,5 +46,4 @@ echo $j1->get('ghjgh'),PHP_EOL;
 echo $j1->has('er');
 
 $j1->clear('ye');
-
 
